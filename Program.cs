@@ -14,10 +14,8 @@ Log.Logger = new LoggerConfiguration()
 builder.Host.UseSerilog();
 
 // ✦ Set up services
-var registry = new ToolRegistry();
-var agent = new LlmAgent(registry);
-builder.Services.AddSingleton(registry);
-builder.Services.AddSingleton(agent);
+builder.Services.AddSingleton<ToolRegistry>();
+builder.Services.AddSingleton<LlmAgent>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -34,7 +32,7 @@ if (app.Environment.IsDevelopment())
 // ✦ Set up routes
 app.MapGet("/health", () => Results.Ok("Healthy"));
 
-app.MapPost("/tools/register", async (ToolRegistration registration) =>
+app.MapPost("/tools/register", async (ToolRegistration registration, ToolRegistry registry) =>
 {
     var tool = new Tool(
         registration.Name,
@@ -58,7 +56,6 @@ app.MapPost("/agent/execute", async ([FromBody] string prompt, LlmAgent agent) =
 
     Log.Information("Agent executed successfully.");
 });
-
 
 // ✦ Run the app
 app.Run("http://0.0.0.0");
