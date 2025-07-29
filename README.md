@@ -81,8 +81,3 @@ The project has the following areas for future development:
 * Integrating additional tools and services
 * Enhancing the NLP and ML capabilities of the AI agent
 * Improving the user interface and experience
-
-**Conclusion**
-----------
-
-The Teabot project is a .NET-based web application that utilizes NLP and ML to provide a conversational interface for users. The project has a modular structure, with a focus on scalability and maintainability. This documentation provides an overview of the project's components, services, and dependencies, as well as areas for future development.
