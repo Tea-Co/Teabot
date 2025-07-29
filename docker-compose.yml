@@ -1,0 +1,19 @@
+version: "3.9"
+services:
+
+  agent:
+    build:
+      context: ./
+    container_name: agent
+    networks:
+      - default
+    ports:
+      - 80:80
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+
+networks:
+
+  default:
+    external: true
+    name: default-network
